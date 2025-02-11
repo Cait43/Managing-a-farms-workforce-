@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Student\\Desktop\\project\\BlazorApp1\\BlazorApp1.csproj": {}
+    "C:\\Users\\Student\\Documents\\Module Dev Containers\\Managing-a-farms-workforce-\\project\\BlazorApp1\\BlazorApp1.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Student\\Desktop\\project\\BlazorApp1\\BlazorApp1.csproj": {
+    "C:\\Users\\Student\\Documents\\Module Dev Containers\\Managing-a-farms-workforce-\\project\\BlazorApp1\\BlazorApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Student\\Desktop\\project\\BlazorApp1\\BlazorApp1.csproj",
+        "projectUniqueName": "C:\\Users\\Student\\Documents\\Module Dev Containers\\Managing-a-farms-workforce-\\project\\BlazorApp1\\BlazorApp1.csproj",
         "projectName": "BlazorApp1",
-        "projectPath": "c:\\Users\\Student\\Desktop\\project\\BlazorApp1\\BlazorApp1.csproj",
+        "projectPath": "C:\\Users\\Student\\Documents\\Module Dev Containers\\Managing-a-farms-workforce-\\project\\BlazorApp1\\BlazorApp1.csproj",
         "packagesPath": "C:\\Users\\Student\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Student\\Desktop\\project\\BlazorApp1\\obj\\",
+        "outputPath": "C:\\Users\\Student\\Documents\\Module Dev Containers\\Managing-a-farms-workforce-\\project\\BlazorApp1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Student\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -63,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
