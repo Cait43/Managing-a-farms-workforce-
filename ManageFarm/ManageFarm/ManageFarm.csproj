@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\images\FARM1974-copy-scaled-1-e1648648190986.jpg" />
+  </ItemGroup>
+
 </Project>
