@@ -20,3 +20,20 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*weather page style*/
+
+table {
+    width: 50%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
