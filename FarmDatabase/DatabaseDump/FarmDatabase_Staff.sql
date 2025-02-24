@@ -26,7 +26,7 @@ CREATE TABLE `Staff` (
   `Id` int NOT NULL,
   `Name` varchar(45) DEFAULT NULL,
   `ContactInfo` varchar(45) DEFAULT NULL,
-  `Pay` decimal(10,2) DEFAULT NULL,
+  `HourlyWage` decimal(10,2) DEFAULT NULL,
   `Role` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -38,6 +38,7 @@ CREATE TABLE `Staff` (
 
 LOCK TABLES `Staff` WRITE;
 /*!40000 ALTER TABLE `Staff` DISABLE KEYS */;
+INSERT INTO `Staff` VALUES (1,'Jane Doe','jane@hotmail.com',17.45,'Farmworker'),(2,'John Doe','jane@gmail.com',27.24,'Manager'),(3,'Maxine Caulfield','maxine@outlook.com',19.95,'Maintenance');
 /*!40000 ALTER TABLE `Staff` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-02-24 21:51:57
+-- Dump completed on 2025-02-24 22:18:10
