@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ManageFarm.Data.ManageFarmContext;
 using ManageFarm.Models;
+using System.Drawing.Printing;
 
 
 namespace ManageFarm.Controllers

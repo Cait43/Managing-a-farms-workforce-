@@ -1,22 +1,17 @@
 ﻿@page
-@model IEnumerable<ManageFarm.Models.Staff>
+
 @{
     ViewData["Title"] = "Workers";
 
 }
-@using Microsoft.EntityFrameworkCore;
-@using Microsoft.Extensions.DependencyInjection;
-@using ManageFarm.Data.ManageFarmContext;
 
-@inject cs dbContext
 
 
 <h1>Worker info</h1>
 
 @{
-    using ManageFarm.Controllers.StaffController staffController = new Controllers.StaffController(dbContext);
 
-    var staffView = staffController.Index();
+    //Html.RenderPartial( staffController.Index());
     // need to display view
 
 
