@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ManageFarm.Models.Staff>
+﻿@model IEnumerable<ManageFarm.Models.Task>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,16 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactInfo)
+                @Html.DisplayNameFor(model => model.Field)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HourlyWage)
+                @Html.DisplayNameFor(model => model.Machine)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Role)
+                @Html.DisplayNameFor(model => model.Staff)
             </th>
             <th></th>
         </tr>
@@ -31,16 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ContactInfo)
+                @Html.DisplayFor(modelItem => item.Field.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HourlyWage)
+                @Html.DisplayFor(modelItem => item.Machine.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Role)
+                @Html.DisplayFor(modelItem => item.Staff.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

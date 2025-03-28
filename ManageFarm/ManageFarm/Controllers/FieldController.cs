@@ -9,22 +9,22 @@ using ManageFarm.Models;
 
 namespace ManageFarm.Controllers
 {
-    public class StaffController : Controller
+    public class FieldController : Controller
     {
         private readonly FarmDatabaseContext _context;
 
-        public StaffController(FarmDatabaseContext context)
+        public FieldController(FarmDatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: Staff
+        // GET: Fields
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Staff.ToListAsync());
+            return View(await _context.Fields.ToListAsync());
         }
 
-        // GET: Staff/Details/5
+        // GET: Fields/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace ManageFarm.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staff
+            var @field = await _context.Fields
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (staff == null)
+            if (@field == null)
             {
                 return NotFound();
             }
 
-            return View(staff);
+            return View(@field);
         }
 
-        // GET: Staff/Create
+        // GET: Fields/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Staff/Create
+        // POST: Fields/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ContactInfo,HourlyWage,Role")] Staff staff)
+        public async Task<IActionResult> Create([Bind("Id,Crop")] Field @field)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(staff);
+                _context.Add(@field);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(staff);
+            return View(@field);
         }
 
-        // GET: Staff/Edit/5
+        // GET: Fields/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace ManageFarm.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staff.FindAsync(id);
-            if (staff == null)
+            var @field = await _context.Fields.FindAsync(id);
+            if (@field == null)
             {
                 return NotFound();
             }
-            return View(staff);
+            return View(@field);
         }
 
-        // POST: Staff/Edit/5
+        // POST: Fields/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ContactInfo,HourlyWage,Role")] Staff staff)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Crop")] Field @field)
         {
-            if (id != staff.Id)
+            if (id != @field.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace ManageFarm.Controllers
             {
                 try
                 {
-                    _context.Update(staff);
+                    _context.Update(@field);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StaffExists(staff.Id))
+                    if (!FieldExists(@field.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace ManageFarm.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(staff);
+            return View(@field);
         }
 
-        // GET: Staff/Delete/5
+        // GET: Fields/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,34 +123,34 @@ namespace ManageFarm.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staff
+            var @field = await _context.Fields
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (staff == null)
+            if (@field == null)
             {
                 return NotFound();
             }
 
-            return View(staff);
+            return View(@field);
         }
 
-        // POST: Staff/Delete/5
+        // POST: Fields/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var staff = await _context.Staff.FindAsync(id);
-            if (staff != null)
+            var @field = await _context.Fields.FindAsync(id);
+            if (@field != null)
             {
-                _context.Staff.Remove(staff);
+                _context.Fields.Remove(@field);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StaffExists(int id)
+        private bool FieldExists(int id)
         {
-            return _context.Staff.Any(e => e.Id == id);
+            return _context.Fields.Any(e => e.Id == id);
         }
     }
 }

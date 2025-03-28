@@ -25,7 +25,7 @@ public partial class FarmDatabaseContext : DbContext
     {
         modelBuilder.Entity<Field>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Field__3214EC074D42CB48");
+            entity.HasKey(e => e.Id).HasName("PK__Field__3214EC0700A8E46B");
 
             entity.ToTable("Field");
 
@@ -38,7 +38,7 @@ public partial class FarmDatabaseContext : DbContext
 
         modelBuilder.Entity<Machine>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Machine__3214EC07FA22CE99");
+            entity.HasKey(e => e.Id).HasName("PK__Machine__3214EC07FBCF565C");
 
             entity.ToTable("Machine");
 
@@ -63,7 +63,7 @@ public partial class FarmDatabaseContext : DbContext
 
         modelBuilder.Entity<Staff>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Staff__3214EC07677DAD63");
+            entity.HasKey(e => e.Id).HasName("PK__Staff__3214EC07F67B145D");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.ContactInfo)
@@ -85,7 +85,7 @@ public partial class FarmDatabaseContext : DbContext
 
         modelBuilder.Entity<Task>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Task__3214EC07A0C8506E");
+            entity.HasKey(e => e.Id).HasName("PK__Task__3214EC07166E2760");
 
             entity.ToTable("Task");
 

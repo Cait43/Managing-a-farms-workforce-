@@ -9,22 +9,23 @@ using ManageFarm.Models;
 
 namespace ManageFarm.Controllers
 {
-    public class StaffController : Controller
+    public class MachineController : Controller
     {
         private readonly FarmDatabaseContext _context;
 
-        public StaffController(FarmDatabaseContext context)
+        public MachineController(FarmDatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: Staff
+        // GET: Machines
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Staff.ToListAsync());
+            var farmDatabaseContext = _context.Machines.Include(m => m.Field);
+            return View(await farmDatabaseContext.ToListAsync());
         }
 
-        // GET: Staff/Details/5
+        // GET: Machines/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +33,42 @@ namespace ManageFarm.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staff
+            var machine = await _context.Machines
+                .Include(m => m.Field)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (staff == null)
+            if (machine == null)
             {
                 return NotFound();
             }
 
-            return View(staff);
+            return View(machine);
         }
 
-        // GET: Staff/Create
+        // GET: Machines/Create
         public IActionResult Create()
         {
+            ViewData["FieldId"] = new SelectList(_context.Fields, "Id", "Id");
             return View();
         }
 
-        // POST: Staff/Create
+        // POST: Machines/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ContactInfo,HourlyWage,Role")] Staff staff)
+        public async Task<IActionResult> Create([Bind("Id,Type,NextTestDate,Status,FieldId")] Machine machine)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(staff);
+                _context.Add(machine);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(staff);
+            ViewData["FieldId"] = new SelectList(_context.Fields, "Id", "Id", machine.FieldId);
+            return View(machine);
         }
 
-        // GET: Staff/Edit/5
+        // GET: Machines/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +76,23 @@ namespace ManageFarm.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staff.FindAsync(id);
-            if (staff == null)
+            var machine = await _context.Machines.FindAsync(id);
+            if (machine == null)
             {
                 return NotFound();
             }
-            return View(staff);
+            ViewData["FieldId"] = new SelectList(_context.Fields, "Id", "Id", machine.FieldId);
+            return View(machine);
         }
 
-        // POST: Staff/Edit/5
+        // POST: Machines/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ContactInfo,HourlyWage,Role")] Staff staff)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Type,NextTestDate,Status,FieldId")] Machine machine)
         {
-            if (id != staff.Id)
+            if (id != machine.Id)
             {
                 return NotFound();
             }
@@ -96,12 +101,12 @@ namespace ManageFarm.Controllers
             {
                 try
                 {
-                    _context.Update(staff);
+                    _context.Update(machine);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StaffExists(staff.Id))
+                    if (!MachineExists(machine.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +117,11 @@ namespace ManageFarm.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(staff);
+            ViewData["FieldId"] = new SelectList(_context.Fields, "Id", "Id", machine.FieldId);
+            return View(machine);
         }
 
-        // GET: Staff/Delete/5
+        // GET: Machines/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,34 +129,35 @@ namespace ManageFarm.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staff
+            var machine = await _context.Machines
+                .Include(m => m.Field)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (staff == null)
+            if (machine == null)
             {
                 return NotFound();
             }
 
-            return View(staff);
+            return View(machine);
         }
 
-        // POST: Staff/Delete/5
+        // POST: Machines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var staff = await _context.Staff.FindAsync(id);
-            if (staff != null)
+            var machine = await _context.Machines.FindAsync(id);
+            if (machine != null)
             {
-                _context.Staff.Remove(staff);
+                _context.Machines.Remove(machine);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StaffExists(int id)
+        private bool MachineExists(int id)
         {
-            return _context.Staff.Any(e => e.Id == id);
+            return _context.Machines.Any(e => e.Id == id);
         }
     }
 }

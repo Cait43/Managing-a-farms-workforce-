@@ -9,22 +9,23 @@ using ManageFarm.Models;
 
 namespace ManageFarm.Controllers
 {
-    public class StaffController : Controller
+    public class TaskController : Controller
     {
         private readonly FarmDatabaseContext _context;
 
-        public StaffController(FarmDatabaseContext context)
+        public TaskController(FarmDatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: Staff
+        // GET: Tasks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Staff.ToListAsync());
+            var farmDatabaseContext = _context.Tasks.Include(t => t.Field).Include(t => t.Machine).Include(t => t.Staff);
+            return View(await farmDatabaseContext.ToListAsync());
         }
 
-        // GET: Staff/Details/5
+        // GET: Tasks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +33,48 @@ namespace ManageFarm.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staff
+            var task = await _context.Tasks
+                .Include(t => t.Field)
+                .Include(t => t.Machine)
+                .Include(t => t.Staff)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (staff == null)
+            if (task == null)
             {
                 return NotFound();
             }
 
-            return View(staff);
+            return View(task);
         }
 
-        // GET: Staff/Create
+        // GET: Tasks/Create
         public IActionResult Create()
         {
+            ViewData["FieldId"] = new SelectList(_context.Fields, "Id", "Id");
+            ViewData["MachineId"] = new SelectList(_context.Machines, "Id", "Id");
+            ViewData["StaffId"] = new SelectList(_context.Staff, "Id", "Id");
             return View();
         }
 
-        // POST: Staff/Create
+        // POST: Tasks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ContactInfo,HourlyWage,Role")] Staff staff)
+        public async Task<IActionResult> Create([Bind("Id,Description,FieldId,MachineId,StaffId")] Models.Task task)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(staff);
+                _context.Add(task);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(staff);
+            ViewData["FieldId"] = new SelectList(_context.Fields, "Id", "Id", task.FieldId);
+            ViewData["MachineId"] = new SelectList(_context.Machines, "Id", "Id", task.MachineId);
+            ViewData["StaffId"] = new SelectList(_context.Staff, "Id", "Id", task.StaffId);
+            return View(task);
         }
 
-        // GET: Staff/Edit/5
+        // GET: Tasks/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +82,25 @@ namespace ManageFarm.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staff.FindAsync(id);
-            if (staff == null)
+            var task = await _context.Tasks.FindAsync(id);
+            if (task == null)
             {
                 return NotFound();
             }
-            return View(staff);
+            ViewData["FieldId"] = new SelectList(_context.Fields, "Id", "Id", task.FieldId);
+            ViewData["MachineId"] = new SelectList(_context.Machines, "Id", "Id", task.MachineId);
+            ViewData["StaffId"] = new SelectList(_context.Staff, "Id", "Id", task.StaffId);
+            return View(task);
         }
 
-        // POST: Staff/Edit/5
+        // POST: Tasks/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ContactInfo,HourlyWage,Role")] Staff staff)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,FieldId,MachineId,StaffId")] Models.Task task)
         {
-            if (id != staff.Id)
+            if (id != task.Id)
             {
                 return NotFound();
             }
@@ -96,12 +109,12 @@ namespace ManageFarm.Controllers
             {
                 try
                 {
-                    _context.Update(staff);
+                    _context.Update(task);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StaffExists(staff.Id))
+                    if (!TaskExists(task.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +125,13 @@ namespace ManageFarm.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(staff);
+            ViewData["FieldId"] = new SelectList(_context.Fields, "Id", "Id", task.FieldId);
+            ViewData["MachineId"] = new SelectList(_context.Machines, "Id", "Id", task.MachineId);
+            ViewData["StaffId"] = new SelectList(_context.Staff, "Id", "Id", task.StaffId);
+            return View(task);
         }
 
-        // GET: Staff/Delete/5
+        // GET: Tasks/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,34 +139,37 @@ namespace ManageFarm.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staff
+            var task = await _context.Tasks
+                .Include(t => t.Field)
+                .Include(t => t.Machine)
+                .Include(t => t.Staff)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (staff == null)
+            if (task == null)
             {
                 return NotFound();
             }
 
-            return View(staff);
+            return View(task);
         }
 
-        // POST: Staff/Delete/5
+        // POST: Tasks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var staff = await _context.Staff.FindAsync(id);
-            if (staff != null)
+            var task = await _context.Tasks.FindAsync(id);
+            if (task != null)
             {
-                _context.Staff.Remove(staff);
+                _context.Tasks.Remove(task);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StaffExists(int id)
+        private bool TaskExists(int id)
         {
-            return _context.Staff.Any(e => e.Id == id);
+            return _context.Tasks.Any(e => e.Id == id);
         }
     }
 }
