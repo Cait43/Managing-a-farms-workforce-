@@ -1,7 +1,12 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ManageFarm.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<FarmDatabaseContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FarmDatabaseContext"))); //?? throw new InvalidOperationException("Connection string 'FarmDatabaseContext' not found.")));
 
 var app = builder.Build();
 
