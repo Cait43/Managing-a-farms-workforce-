@@ -1,10 +1,62 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿/* Top bar (logo + title) */
+.top-bar {
+    background-color: #588157; /* dark green */
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
 
+    /* Ensure the logo inside the top-bar is properly sized */
+    .top-bar .logo {
+        width: 150px !important; /* Set the logo width to 100px */
+        height: auto !important; /* Maintain aspect ratio */
+    }
+
+/* Farm name text */
+.site-name {
+    font-size: 1.75rem;
+}
+
+/* Bottom nav bar (navigation links) */
+.nav-bar {
+    background-color: #3e8e41; /* contrast green */
+    display: flex;
+    justify-content: center; /* Center the links */
+    padding: 10px 20px;
+    width: 100%;
+}
+
+    /* Nav link styling */
+    .nav-bar a {
+        color: white;
+        text-decoration: none;
+        margin-right: 30px;
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+    }
+
+        .nav-bar a:last-child {
+            margin-right: 0; /* Remove right margin for last link */
+        }
+
+        .nav-bar a:hover {
+            text-decoration: underline;
+        }
+
+    /* Icon spacing */
+    .nav-bar span {
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+/* Other existing styles remain the same */
 a.navbar-brand {
     white-space: normal;
     text-align: center;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 a {
@@ -40,52 +92,47 @@ button.accept-policy {
     line-height: inherit;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
+/* Footer */
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+}
+
+.site-footer {
     width: 100%;
-    white-space: nowrap;
-    line-height: 60px;
+    background-color: #3e8e41; /* dark green */
+    color: #eee; /* light text */
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.9rem;
 }
 
-
-/* The side navigation menu */
-.sidebar {
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    background-color: #55018D;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
-    border-bottom-right-radius: 25px;
-    border-top-right-radius: 25px;
-    padding: 20px;
-    width: 300px;
-    height: 10000px;
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-    /* Sidebar links */
-    .sidebar a {
-        display: block;
-        color: white;
-        padding: 25px;
-        text-decoration: none;
-    }
+.footer-content p {
+    margin: 0 0 10px 0;
+}
 
-        /* Active/current link */
-        .sidebar a.active {
-            background-color:;
-            color: white;
-        }
+.footer-content nav {
+    margin-top: 5px;
+}
 
-        /* Links on mouse-over */
-        .sidebar a:hover:not(.active) {
-            background-color: #555;
-            color: white;
-        }
+.footer-content a {
+    color: #aaa;
+    text-decoration: none;
+    margin: 0 5px;
+    font-weight: 400;
+}
 
-    /*makes the icons level with the text*/
-    .sidebar span {
-        vertical-align: middle;
+    .footer-content a:hover {
+        color: #fff;
+        text-decoration: underline;
     }
