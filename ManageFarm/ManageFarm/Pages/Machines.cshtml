@@ -1,0 +1,76 @@
+﻿@page
+@model ManageFarm.Pages.MachinesListModel
+@{
+    ViewData["Title"] = "Machines List";
+}
+
+<h2>Machines List</h2>
+
+<!-- Add Machine Form -->
+<form method="post">
+    <div>
+        <label asp-for="NewMachine.TypeOfMachine"></label>
+        <input asp-for="NewMachine.TypeOfMachine" />
+        <span asp-validation-for="NewMachine.TypeOfMachine" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="NewMachine.Status"></label>
+        <input asp-for="NewMachine.Status" />
+        <span asp-validation-for="NewMachine.Status" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="NewMachine.NextMaintenanceCheck"></label>
+        <input asp-for="NewMachine.NextMaintenanceCheck" type="date" />
+        <span asp-validation-for="NewMachine.NextMaintenanceCheck" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="NewMachine.FieldId">Field</label>
+        <select asp-for="NewMachine.FieldId" asp-items="@(new SelectList(Model.Fields, "FieldId", "FieldId"))">
+            <option value="">Select Field</option>
+        </select>
+        <span asp-validation-for="NewMachine.FieldId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Add Machine</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<!-- Machines Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Machine ID</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Next Maintenance</th>
+            <th>Field ID</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var machine in Model.MachinesList)
+        {
+            <tr>
+                <td>@machine.MachineId</td>
+                <td>@machine.TypeOfMachine</td>
+                <td>@machine.Status</td>
+                <td>@machine.NextMaintenanceCheck.ToString("yyyy-MM-dd")</td>
+                <td>@machine.FieldId</td>
+                <td>
+                    <!-- Edit Button -->
+                    <a asp-page="/MachineEdit" asp-route-id="@machine.MachineId" class="btn btn-primary">Edit</a>
+
+                    <!-- Delete Button -->
+                    <form method="post" asp-page="/MachineDelete" asp-route-id="@machine.MachineId" style="display:inline;">
+                        <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to delete this machine?')">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,53 @@
+﻿@page
+@model ManageFarm.Pages.FieldsModel
+@{
+    ViewData["Title"] = "Fields List";
+}
+
+<h2>Fields List</h2>
+
+<!-- Add Field Form -->
+<form method="post">
+    <div>
+        <label asp-for="NewField.Crop"></label>
+        <input asp-for="NewField.Crop" />
+        <span asp-validation-for="NewField.Crop" class="text-danger"></span> 
+    </div>
+    <button type="submit" class="btn btn-success">Add Field</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<!-- Fields Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Field ID</th>
+            <th>Crop</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var field in Model.FieldList)
+        {
+            <tr>
+                <td>@field.FieldId</td>
+                <td>@field.Crop</td>
+                <td>
+                    <!-- Edit Button -->
+                    <a asp-page="/FieldEdit" asp-route-id="@field.FieldId" class="btn btn-primary">Edit</a>
+
+                    <!-- Delete Button -->
+                    <form method="post" asp-page="/FieldDelete" asp-route-id="@field.FieldId" style="display:inline;">
+                        <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to delete this field?')">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

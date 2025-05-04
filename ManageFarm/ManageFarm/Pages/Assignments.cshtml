@@ -1,0 +1,84 @@
+﻿@page
+@model ManageFarm.Pages.AssignmentsListModel
+@{
+    ViewData["Title"] = "Assignments List";
+}
+
+<h2>Assignments List</h2>
+
+<!-- Add Assignment Form -->
+<form method="post">
+    <div>
+        <label asp-for="NewAssignment.StaffId">Staff</label>
+        <select asp-for="NewAssignment.StaffId" asp-items="@(new SelectList(Model.StaffMembers, "StaffId", "Name"))">
+            <option value="">Select Staff</option>
+        </select>
+        <span asp-validation-for="NewAssignment.StaffId" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="NewAssignment.MachineId">Machine</label>
+        <select asp-for="NewAssignment.MachineId" asp-items="@(new SelectList(Model.Machines, "MachineId", "TypeOfMachine"))">
+            <option value="">Select Machine</option>
+        </select>
+        <span asp-validation-for="NewAssignment.MachineId" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="NewAssignment.FieldId">Field</label>
+        <select asp-for="NewAssignment.FieldId" asp-items="@(new SelectList(Model.Fields, "FieldId", "FieldId"))">
+            <option value="">Select Field</option>
+        </select>
+        <span asp-validation-for="NewAssignment.FieldId" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="NewAssignment.Task">Task</label>
+        <input asp-for="NewAssignment.Task" />
+        <span asp-validation-for="NewAssignment.Task" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Add Assignment</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<!-- Assignments Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Assignment ID</th>
+            <th>Staff Name</th>
+            <th>Machine</th>
+            <th>Field</th>
+            <th>Task</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var assignment in Model.AssignmentsList)
+        {
+            <tr>
+                <td>@assignment.AssignmentId</td>
+                <td>@assignment.Staff.Name</td>
+                <td>@assignment.Machine?.TypeOfMachine</td>
+                <td>@assignment.Field?.FieldId</td>
+                <td>@assignment.Task</td>
+                <td>
+                    <!-- Edit Button -->
+                    <a asp-page="/AssignmentEdit" asp-route-id="@assignment.AssignmentId" class="btn btn-primary">Edit</a>
+
+                    <!-- Delete Button -->
+                    <form method="post" asp-page="/AssignmentDelete" asp-route-id="@assignment.AssignmentId" style="display:inline;">
+                        <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to delete this assignment?')">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
