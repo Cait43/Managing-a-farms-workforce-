@@ -1,3 +1,19 @@
+@page
+@model ManageFarm.Pages.AssignmentsListModel
+@{
+    ViewData["Title"] = "Assignments List";
+}
+
+<h2>Assignments List</h2>
+
+<!-- Add Assignment Form -->
+<form method="post">
+    <div>
+        <label asp-for="NewAssignment.StaffId">Staff</label>
+        <select asp-for="NewAssignment.StaffId" asp-items="@(new SelectList(Model.StaffMembers, "StaffId", "Name"))">
+            <option value="">Select Staff</option>
+        </select>
+        <span asp-validation-for="NewAssignment.StaffId" class="text-danger"></span>
     </div>
 
     <div>
