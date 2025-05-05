@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model ManageFarm.Pages.AssignmentsListModel
 @{
     ViewData["Title"] = "Assignments List";
@@ -41,9 +41,7 @@
     <button type="submit" class="btn btn-success">Add Assignment</button>
 </form>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+
 
 <!-- Assignments Table -->
 <table class="table">
@@ -82,3 +80,15 @@
         }
     </tbody>
 </table>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        window.onload = function () {
+            var message = '@TempData["ErrorMessage"]';
+            if (message && message !== "null" && message !== "") {
+                alert(message);
+            }
+        };
+    </script>
+}

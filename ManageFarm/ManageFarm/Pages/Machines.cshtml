@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model ManageFarm.Pages.MachinesListModel
 @{
     ViewData["Title"] = "Machines List";
@@ -33,9 +33,6 @@
     <button type="submit" class="btn btn-success">Add Machine</button>
 </form>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
 
 <!-- Machines Table -->
 <table class="table">
@@ -74,3 +71,20 @@
         }
     </tbody>
 </table>
+
+</table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        window.onload = function () {
+            var message = @Html.Raw(Json.Serialize(TempData["ErrorMessage"]));
+            if (message && message !== "null" && message !== "") {
+                alert(message);
+            }
+        };
+    </script>
+}
+
+

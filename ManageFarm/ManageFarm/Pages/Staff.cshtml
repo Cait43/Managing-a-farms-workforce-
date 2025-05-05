@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model StaffListModel
 @{
     ViewData["Title"] = "Staff List";
@@ -31,9 +31,6 @@
     <button type="submit" class="btn btn-success">Add Staff</button>
 </form>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
 
 <!-- Staff Table -->
 <h2>Staff List</h2>
@@ -74,3 +71,15 @@
         }
     </tbody>
 </table>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        window.onload = function () {
+            var message = '@TempData["ErrorMessage"]';
+            if (message && message !== "null" && message !== "") {
+                alert(message); 
+            }
+        };
+    </script>
+}

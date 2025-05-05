@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model ManageFarm.Pages.FieldsModel
 @{
     ViewData["Title"] = "Fields List";
@@ -16,9 +16,7 @@
     <button type="submit" class="btn btn-success">Add Field</button>
 </form>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+
 
 <!-- Fields Table -->
 <table class="table">
@@ -51,3 +49,15 @@
         }
     </tbody>
 </table>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        window.onload = function () {
+            var message = '@TempData["ErrorMessage"]';
+            if (message && message !== "null" && message !== "") {
+                alert(message);
+            }
+        };
+    </script>
+}

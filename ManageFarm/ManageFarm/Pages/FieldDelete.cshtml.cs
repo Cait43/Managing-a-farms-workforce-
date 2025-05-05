@@ -30,6 +30,7 @@ namespace ManageFarm.Pages
             return Page();
         }
 
+
         public async Task<IActionResult> OnPostAsync(int id)
         {
             var field = await _context.Fields.FindAsync(id);
@@ -37,11 +38,20 @@ namespace ManageFarm.Pages
             {
                 return NotFound();
             }
-           
-            _context.Fields.Remove(field);
-            await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Fields"); // Redirect back to the Fields list
+            try
+            {
+                _context.Fields.Remove(field);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                TempData["ErrorMessage"] = "Cannot delete this field because it is referenced elsewhere. Please unassign it first before attempting to delete.";
+                return RedirectToPage("/Fields"); // redirect back to the Field table page
+            }
+
+            return RedirectToPage("/Fields"); // redirect if deletion happens
         }
     }
 }
+
