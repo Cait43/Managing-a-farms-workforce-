@@ -19,7 +19,7 @@ After setting up the server:
  - Your browser should open possibly with a warning about a security risk.
   - On the lab machines firefox is opened, on firefox click "Advanced..." then "Accept the Risk and Continue"
 
-    For other browsers the process may differ.
+     For other browsers the process may differ.
  - The password for the login page is "Spinney1234", after inputting the password click on Login
 
 You have successfully entered the website.
