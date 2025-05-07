@@ -9,6 +9,7 @@ public class Staff
     public string Name { get; set; }
 
     [Required]
+    [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
     public string ContactInfo { get; set; }
 
     [Required]
