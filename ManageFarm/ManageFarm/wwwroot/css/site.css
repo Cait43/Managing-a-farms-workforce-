@@ -62,3 +62,22 @@ th {
     border: 3px solid green;
     padding: 10px;
 }
+.nav-bar .nav-link {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-bar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: #ffc107; 
+    text-decoration: none;
+}
+
+.nav-bar .nav-link:hover .material-symbols-outlined {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
