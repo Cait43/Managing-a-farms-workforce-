@@ -8,7 +8,7 @@ Initial set up:
 
 Before running the project we first need to set up a local server for the database:
  - Open SQL Server Management Studio 20
- - In the "Connect to Server" window type "(local)\SQLEXPRESS" into the Server name field replacing the existing text present.
+ - In the "Connect to Server" window type "(local)\SQLEXPRESS" (without quotes) into the Server name field replacing the existing text present.
  - Tick the "Trust server certificate" box
  - Click on the "Connect" button
 
@@ -20,7 +20,7 @@ After setting up the server:
   - On the lab machines firefox is opened, on firefox click "Advanced..." then "Accept the Risk and Continue"
 
      For other browsers the process may differ.
- - The password for the login page is "computing" (without the quotes), after inputting the password click on Login
+ - The password for the login page is "computing" (without quotes), after inputting the password click on Login
 
 You have successfully entered the website.
 Utilise the tabs in the ribbon to navigate around the website by clicking on them.
