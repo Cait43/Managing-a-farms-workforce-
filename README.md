@@ -38,6 +38,6 @@ The database is already pre-populated with sample data.
 
 The various database tabs are intuitive however it should be noted that fields/machines or staff currently part of an assignment or a field that a machine is currently on cannot be deleted.
 
-To delete the row first delete all assignment or machines using the row in question or edit them to no longer require the row in question then one cannot delete the desired row.
+To delete the row first delete all assignment or machines using the row in question or edit them to no longer require the row in question then one may delete the desired row.
 
-If you try to delete a row currently in use a message will appear warning you of this.
+If you try to delete a row currently in use a message will appear warning you of this and you will be stopped from doing so.
