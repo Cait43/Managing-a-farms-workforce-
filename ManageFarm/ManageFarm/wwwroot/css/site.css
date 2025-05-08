@@ -53,30 +53,3 @@ th, td {
     border: 3px solid green;
     padding: 10px;
 }
-
-/**/
-
-.contact-page {
-    font-family: sans-serif;
-    background: #fff;
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 20px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    color: #333;
-}
-
-    .contact-page h1,
-    .contact-page h2 {
-        color: #2e7d32;
-    }
-
-    .contact-page ul {
-        padding-left: 20px;
-        margin-top: 10px;
-    }
-
-    .contact-page p {
-        margin-bottom: 15px;
-    }
