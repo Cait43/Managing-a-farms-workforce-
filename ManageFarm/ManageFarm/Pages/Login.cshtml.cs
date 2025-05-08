@@ -9,11 +9,12 @@ public class LoginModel : PageModel
 
     public string ErrorMessage { get; set; }  // To hold the error message if login fails
 
+    private static string sitePassword = "$2b$12$g8HZPevkl0LNpvqgFEwP1urx1dHt/IbnMn5NlwNjH4SBWitxZ/9I6"; // The hashed and salted password for the site.
     // On POST request (when user submits the form)
     public IActionResult OnPost()
     {
         // Check if the entered password matches the predefined password
-        if (Password == "Spinney1234")
+        if (BCrypt.Net.BCrypt.Verify(Password, sitePassword))
         {
             // Set session variable to indicate user is logged in
             HttpContext.Session.SetString("IsLoggedIn", "true");
