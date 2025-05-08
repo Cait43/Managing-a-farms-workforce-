@@ -1,5 +1,7 @@
 html {
     font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 html, body {
@@ -17,6 +19,7 @@ html, body {
 
 body {
     font-family: 'Univers', sans-serif;
+    margin-bottom: 60px;
 }
 
 
@@ -26,21 +29,9 @@ body {
     }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px;
-}
+/**/
 
 /*weather page style*/
-
 table {
     width: 50%;
     margin: 20px auto;
@@ -50,15 +41,42 @@ table {
 th, td {
     border: 1px solid black;
     padding: 10px;
-}
-
-th {
     background-color: #f2f2f2;
 }
 
+/**/
+
+/*google maps*/
 #map-canvas {
     margin: auto;
     width: 50%;
     border: 3px solid green;
     padding: 10px;
 }
+
+/**/
+
+.contact-page {
+    font-family: sans-serif;
+    background: #fff;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+    .contact-page h1,
+    .contact-page h2 {
+        color: #2e7d32;
+    }
+
+    .contact-page ul {
+        padding-left: 20px;
+        margin-top: 10px;
+    }
+
+    .contact-page p {
+        margin-bottom: 15px;
+    }
