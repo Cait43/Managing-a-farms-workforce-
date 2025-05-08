@@ -1,4 +1,4 @@
-The following are instructions on running the website on the computer labs or ones personal machine.
+The following are instructions on running a local instance of the website on the computer labs or ones personal machine.
 
 Initial set up:
  - Download the zip file of the code from Github, ensure you are on the main branch.
