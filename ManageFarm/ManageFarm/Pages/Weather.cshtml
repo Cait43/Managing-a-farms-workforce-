@@ -5,6 +5,7 @@
 <div class="text-center">
     <h2>Weather Information</h2>
 </div>
+
 <table>
     <thead>
         <tr>
@@ -14,51 +15,33 @@
             <th>Weather</th>
         </tr>
     </thead>
-    <tbody id="weatherData"></tbody>
+    <tbody id="weatherData">
+        <!-- for weather data -->
+    </tbody>
 </table>
 
+<!-- used this for reference https://thecodingbus.info/integrating-openweather-api-for-weather-data/ -->
 @section Scripts {
     <script>
-        async function getWeather() {
-            const apiKey = '8897482e750dd9af6dcb4d04aeeafd03'; // Replace with your OpenWeather API Key
-            const lat = 53.242100654571644;
-            const lon = -0.6671225455690468;
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&appid=8897482e750dd9af6dcb4d04aeeafd03&units=metric`)
+            .then(response => response.json())
+            .then(data => {
+                const temperature = data.main.temp;
+                const humidity = data.main.humidity;
+                const description = data.weather[0].description;
 
-            const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+                // creates new row
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${new Date().toLocaleDateString()}</td>
+                    <td>${temperature}°C</td>
+                    <td>${humidity}%</td>
+                    <td>${description}</td>
+                `;
 
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Weather data not found');
-                const data = await response.json();
-
-                let forecastHTML = '';
-                const dailyData = {};
-
-                data.list.forEach(entry => {
-                    const date = entry.dt_txt.split(' ')[0];
-                    if (!dailyData[date]) {
-                        dailyData[date] = entry;
-                    }
-                });
-
-                Object.keys(dailyData).slice(0, 7).forEach(date => {
-                    const entry = dailyData[date];
-                    forecastHTML += `
-                                        <tr>
-                                            <td>${date}</td>
-                                            <td>${entry.main.temp}</td>
-                                            <td>${entry.main.humidity}</td>
-                                            <td>${entry.weather[0].description}</td>
-                                        </tr>
-                                    `;
-                });
-
-                document.getElementById('weatherData').innerHTML = forecastHTML;
-            } catch (error) {
-                alert(error.message);
-            }
-        }
-
-        window.onload = getWeather;
+                // Adds the row to the table
+                document.getElementById('weatherData').appendChild(row);
+            })
+            .catch(error => console.error('Error:', error));
     </script>
 }
